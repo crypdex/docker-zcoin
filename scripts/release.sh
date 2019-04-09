@@ -7,7 +7,7 @@
 
 #VERSION=
 SERVICE="zcoin"
-ARCH="x86_64"
+ARCH="arm64v8"
 ORG=crypdex
 
 # Build and push builds for these architectures
