@@ -2,6 +2,9 @@ FROM debian:stable-slim
 
 LABEL maintainer.0="David Michael"
 
+ENV ZCOIN_VERSION=0.13.7.7
+ENV ZCOIN_DATA=/home/zcoin/.zcoin
+
 RUN useradd -r zcoin \
   && apt-get update -y \
   && apt-get install -y curl gnupg git build-essential file \
@@ -18,9 +21,6 @@ RUN useradd -r zcoin \
 RUN git clone https://github.com/ncopa/su-exec.git \
   && cd su-exec && make && cp su-exec /usr/local/bin/ \
   && cd .. && rm -rf su-exec
-
-ENV ZCOIN_VERSION=0.13.7.7
-ENV ZCOIN_DATA=/home/zcoin/.zcoin
 
 RUN curl -SLO https://github.com/zcoinofficial/zcoin/releases/download/v${ZCOIN_VERSION}/zcoin-${ZCOIN_VERSION}-linux64.tar.gz \
   && curl -SLO https://github.com/zcoinofficial/zcoin/releases/download/v${ZCOIN_VERSION}/SHA256SUMS.asc \

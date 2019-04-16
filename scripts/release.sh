@@ -7,8 +7,8 @@
 
 #VERSION=
 SERVICE="zcoin"
-ARCH="arm64v8"
-ORG=crypdex
+ARCH="arm64v8 x86_64"
+ORG="crypdex"
 
 # Build and push builds for these architectures
 for arch in ${ARCH}; do

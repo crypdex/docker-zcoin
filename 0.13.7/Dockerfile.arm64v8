@@ -4,15 +4,7 @@ ARG RELEASE_TAG=v0.13.7.7
 
 LABEL maintainer.0="David Michael"
 
-RUN useradd -r zcoin \
-  && apt-get update -y \
-  && apt-get install -y curl gnupg git build-essential \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN git clone https://github.com/ncopa/su-exec.git \
-  && cd su-exec && make && cp su-exec /usr/local/bin/ \
-  && cd .. && rm -rf su-exec
+RUN useradd -r zcoin
 
 RUN apt-get update \
   && apt-get install -qq -y build-essential \
@@ -52,7 +44,12 @@ RUN apt-get update \
   && cd .. && rm -rf zcoin \
   && apt-get remove -qq -y libminiupnpc-dev qttools5-dev qttools5-dev-tools libprotobuf-dev libqrencode-dev build-essential libtool autotools-dev automake pkg-config libssl-dev bsdmainutils libboost-all-dev software-properties-common git \
   && apt-get autoremove -y \
-  && rm -rf /var/lib/apt/lists/*
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN git clone https://github.com/ncopa/su-exec.git \
+  && cd su-exec && make && cp su-exec /usr/local/bin/ \
+  && cd .. && rm -rf su-exec
 
 VOLUME ["/home/zcoin/.zcoin"]
 
